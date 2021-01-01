@@ -249,7 +249,7 @@ int Fun4All_G4_sPHENIX(
   Enable::MICROMEGAS_CLUSTER = Enable::MICROMEGAS_CELL && true;
 
   Enable::TRACKING_TRACK = true;
-  Enable::TRACKING_EVAL = Enable::TRACKING_TRACK && true;
+  Enable::TRACKING_EVAL = Enable::TRACKING_TRACK && false;
   Enable::TRACKING_QA = Enable::TRACKING_TRACK and Enable::QA && true;
 
   //  cemc electronics + thin layer of W-epoxy to get albedo from cemc
@@ -261,7 +261,7 @@ int Fun4All_G4_sPHENIX(
   Enable::CEMC_CELL = Enable::CEMC && true;
   Enable::CEMC_TOWER = Enable::CEMC_CELL && true;
   Enable::CEMC_CLUSTER = Enable::CEMC_TOWER && true;
-  Enable::CEMC_EVAL = Enable::CEMC_CLUSTER && true;
+  Enable::CEMC_EVAL = Enable::CEMC_CLUSTER && false;
   Enable::CEMC_QA = Enable::CEMC_CLUSTER and Enable::QA && true;
 
   Enable::HCALIN = true;
@@ -269,7 +269,7 @@ int Fun4All_G4_sPHENIX(
   Enable::HCALIN_CELL = Enable::HCALIN && true;
   Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
   Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
-  Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
+  Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && false;
   Enable::HCALIN_QA = Enable::HCALIN_CLUSTER and Enable::QA && true;
 
   Enable::MAGNET = true;
@@ -280,7 +280,7 @@ int Fun4All_G4_sPHENIX(
   Enable::HCALOUT_CELL = Enable::HCALOUT && true;
   Enable::HCALOUT_TOWER = Enable::HCALOUT_CELL && true;
   Enable::HCALOUT_CLUSTER = Enable::HCALOUT_TOWER && true;
-  Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && true;
+  Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && false;
   Enable::HCALOUT_QA = Enable::HCALOUT_CLUSTER and Enable::QA && true;
 
   // forward EMC
@@ -288,7 +288,7 @@ int Fun4All_G4_sPHENIX(
   Enable::FEMC_ABSORBER = true;
   Enable::FEMC_TOWER = Enable::FEMC && true;
   Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
-  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER and Enable::QA && true;
+  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER and Enable::QA && false;
 
   Enable::EPD = false;
 
@@ -306,7 +306,7 @@ int Fun4All_G4_sPHENIX(
   Enable::CALOTRIGGER = Enable::CEMC_TOWER && Enable::HCALIN_TOWER && Enable::HCALOUT_TOWER && false;
 
   Enable::JETS = true;
-  Enable::JETS_EVAL = Enable::JETS && true;
+  Enable::JETS_EVAL = Enable::JETS && false;
   Enable::JETS_QA = Enable::JETS and Enable::QA && true;
 
   // HI Jet Reco for p+Au / Au+Au collisions (default is false for
