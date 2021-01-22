@@ -163,13 +163,13 @@ int Fun4All_G4_sPHENIX(
     INPUTGENERATOR::SimpleEventGenerator[1]->set_pt_range(2, 50.);
 
     // wide angle tracks for vertex finding
-    INPUTGENERATOR::SimpleEventGenerator[1]->add_particles("pi-", 3);
-    INPUTGENERATOR::SimpleEventGenerator[1]->add_particles("pi+", 3);
-    INPUTGENERATOR::SimpleEventGenerator[1]->set_reuse_existing_vertex(true);
-    INPUTGENERATOR::SimpleEventGenerator[1]->set_existing_vertex_offset_vector(0.0, 0.0, 0.0);
-    INPUTGENERATOR::SimpleEventGenerator[1]->set_eta_range(-1, 1);
-    INPUTGENERATOR::SimpleEventGenerator[1]->set_phi_range(-M_PI, M_PI);
-    INPUTGENERATOR::SimpleEventGenerator[1]->set_pt_range(60, 80.);
+    INPUTGENERATOR::SimpleEventGenerator[2]->add_particles("pi-", 3);
+    INPUTGENERATOR::SimpleEventGenerator[2]->add_particles("pi+", 3);
+    INPUTGENERATOR::SimpleEventGenerator[2]->set_reuse_existing_vertex(true);
+    INPUTGENERATOR::SimpleEventGenerator[2]->set_existing_vertex_offset_vector(0.0, 0.0, 0.0);
+    INPUTGENERATOR::SimpleEventGenerator[2]->set_eta_range(-1, 1);
+    INPUTGENERATOR::SimpleEventGenerator[2]->set_phi_range(-M_PI, M_PI);
+    INPUTGENERATOR::SimpleEventGenerator[2]->set_pt_range(60, 80.);
   }
   // Upsilons
   // if you run more than one of these Input::UPSILON_NUMBER > 1
