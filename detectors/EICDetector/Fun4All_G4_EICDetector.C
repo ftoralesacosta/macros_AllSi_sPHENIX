@@ -22,8 +22,10 @@
 #include <fun4all/Fun4AllServer.h>
 
 #include <phool/recoConsts.h>
+#include <myjetanalysis/MyJetAnalysis.h>
 
 R__LOAD_LIBRARY(libfun4all.so)
+R__LOAD_LIBRARY(libmyjetanalysis.so)
 
 int Fun4All_G4_EICDetector(
     const int nEvents = 1,
@@ -68,17 +70,17 @@ int Fun4All_G4_EICDetector(
   // In case embedding into a production output, please double check your G4Setup_EICDetector.C and G4_*.C consistent with those in the production macro folder
   //  Input::EMBED = true;
   INPUTEMBED::filename = embed_input_file;
-  // Use Pythia 8
-  //  Input::PYTHIA8 = true;
+  //Use Pythia 8
+  Input::PYTHIA8 = true;
 
   // Use Pythia 6
-  //   Input::PYTHIA6 = true;
+  //Input::PYTHIA6 = true;
 
   // Use Sartre
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  Input::SIMPLE = true;
+  //Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
@@ -160,6 +162,12 @@ int Fun4All_G4_EICDetector(
     INPUTGENERATOR::Pythia6->set_config_file(string(getenv("CALIBRATIONROOT")) + "/Generators/phpythia6_ep.cfg");
   }
 
+  if (Input::PYTHIA8)
+  {
+    //INPUTGENERATOR::Pythia8->set_config_file(string(getenv("CALIBRATIONROOT")) + "/Generators/phpythia8_ep.cfg");
+    INPUTGENERATOR::Pythia8->set_config_file("phpythia8.cfg");
+  }
+
   //--------------
   // Set Input Manager specific options
   //--------------
@@ -227,7 +235,7 @@ int Fun4All_G4_EICDetector(
 
   Enable::TRACKING = true;
   Enable::TRACKING_EVAL = Enable::TRACKING && true;
-  G4TRACKING::DISPLACED_VERTEX = false;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
+  G4TRACKING::DISPLACED_VERTEX = true;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
                                          // projections to calorimeters
   G4TRACKING::PROJECTION_CEMC = false;
   G4TRACKING::PROJECTION_FEMC = false;
@@ -292,10 +300,10 @@ int Fun4All_G4_EICDetector(
   // Select only one jet reconstruction- they currently use the same
   // output collections on the node tree!
   Enable::JETS = true;
-  Enable::JETS_EVAL = Enable::JETS && true;
+  //Enable::JETS_EVAL = Enable::JETS && true;
 
   Enable::FWDJETS = true;
-  Enable::FWDJETS_EVAL = Enable::FWDJETS && true;
+  //Enable::FWDJETS_EVAL = Enable::FWDJETS && true;
 
   // HI Jet Reco for jet simulations in Au+Au (default is false for
   // single particle / p+p simulations, or for Au+Au simulations which
@@ -478,6 +486,9 @@ int Fun4All_G4_EICDetector(
     se->registerOutputManager(out);
   }
 
+  MyJetAnalysis *myJetAnalysis = new MyJetAnalysis("AntiKt_Track_r08","AntiKt_Truth_r08","e+jet_output.root");
+  myJetAnalysis->use_initial_vertex();
+  se->registerSubsystem(myJetAnalysis);
   //-----------------
   // Event processing
   //-----------------
