@@ -19,13 +19,14 @@
 #include <G4_Input.C>
 #include <G4_Magnet.C>
 #include <G4_Mvtx_EIC.C>
-#include <G4_Pipe_EIC.C>
+#include "G4_Pipe_EIC.C"
 #include <G4_PlugDoor_EIC.C>
 #include <G4_RICH.C>
 #include <G4_TPC_EIC.C>
-#include <G4_Tracking_EIC.C>
+#include "G4_Tracking_EIC.C"
 #include <G4_User.C>
 #include <G4_World.C>
+#include "G4_AllSi.C"
 
 #include <g4detectors/PHG4CylinderSubsystem.h>
 
@@ -58,7 +59,17 @@ void G4Init()
     cout << "TPC/MVTX and BARREL cannot be enabled together" << endl;
     gSystem->Exit(1);
   }
-
+  else if (Enable::ALLSILICON && (Enable::TPC || Enable::MVTX))
+  {
+    cout << "AllSi Tracker and TCP/MVTX cannot be enabled together" <<endl;
+    gSystem->Exit(1);
+  }
+  else if (Enable::ALLSILICON && Enable::BARREL)
+  {
+    cout << "AllSI Tracker and BARREL cannot be enabled together" << endl;
+    gSystem->Exit(1);
+  } 
+  
   // load detector/material macros and execute Init() function
   if (Enable::PIPE) PipeInit();
   if (Enable::PLUGDOOR) PlugDoorInit();
@@ -68,6 +79,7 @@ void G4Init()
   if (Enable::BARREL) BarrelInit();
   if (Enable::MVTX) MvtxInit();
   if (Enable::TPC) TPCInit();
+  if (Enable::ALLSILICON) AllSiInit();
   if (Enable::TRACKING) TrackingInit();
   if (Enable::BBC) BbcInit();
   if (Enable::CEMC) CEmcInit(72);  // make it 2*2*2*3*3 so we can try other combinations
@@ -139,6 +151,7 @@ int G4Setup()
   if (Enable::BARREL) Barrel(g4Reco, radius);
   if (Enable::MVTX) radius = Mvtx(g4Reco, radius);
   if (Enable::TPC) radius = TPC(g4Reco, radius);
+  if (Enable::ALLSILICON) AllSi(g4Reco);
   if (Enable::BBC) Bbc(g4Reco);
   if (Enable::CEMC) radius = CEmc(g4Reco, radius);
   if (Enable::HCALIN) radius = HCalInner(g4Reco, radius, 4);

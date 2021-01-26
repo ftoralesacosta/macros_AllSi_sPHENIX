@@ -7,12 +7,12 @@
 #include <G4Setup_EICDetector.C>
 #include <G4_Bbc.C>
 #include <G4_CaloTrigger.C>
-#include <G4_DSTReader_EICDetector.C>
+#include "G4_DSTReader_EICDetector.C" //use same-dir version
 #include <G4_FwdJets.C>
 #include <G4_Global.C>
 #include <G4_HIJetReco.C>
 #include <G4_Input.C>
-#include <G4_Jets.C>
+#include "G4_Jets.C"
 #include <G4_Production.C>
 #include <G4_User.C>
 
@@ -219,7 +219,7 @@ int Fun4All_G4_EICDetector(
   Enable::BBCFAKE = true; // Smeared vtx and t0, use if you don't want real BBC in simulation
 
   // whether to simulate the Be section of the beam pipe
-  Enable::PIPE = true;
+  Enable::PIPE = false;
   // EIC beam pipe extension beyond the Be-section:
   //G4PIPE::use_forward_pipes = true;
 
@@ -229,8 +229,9 @@ int Fun4All_G4_EICDetector(
   Enable::BARREL = false;
   Enable::FST = false;
   // mvtx/tpc tracker
-  Enable::MVTX = true;
-  Enable::TPC = true;
+  //Enable::MVTX = true;
+  //Enable::TPC = true;
+  Enable::ALLSILICON =true;
   //  Enable::TPC_ENDCAP = true;
 
   Enable::TRACKING = true;

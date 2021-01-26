@@ -17,6 +17,7 @@
 #include <G4_Mvtx_EIC.C>
 #include <G4_RICH.C>
 #include <G4_TPC_EIC.C>
+//#include "G4_AllSi.C"
 
 #include <g4eval/PHG4DSTReader.h>
 
@@ -100,6 +101,11 @@ void G4DSTreader_EICDetector(const string &outputFile = "G4sPHENIXCells.root")
       ana->AddNode("FST_3");
       ana->AddNode("FST_4");
       ana->AddNode("FST_5");
+    }
+
+    if (Enable::ALLSILICON)
+    {
+      add_AllSi_hits(ana);
     }
 
     if (Enable::CEMC)

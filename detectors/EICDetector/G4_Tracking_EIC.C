@@ -9,12 +9,14 @@
 #include <G4_GEM_EIC.C>
 #include <G4_Mvtx_EIC.C>
 #include <G4_TPC_EIC.C>
+#include "G4_AllSi.C"
 
 #include <g4trackfastsim/PHG4TrackFastSim.h>
 
 #include <trackreco/PHRaveVertexing.h>
 
 #include <g4trackfastsim/PHG4TrackFastSimEval.h>
+//#include <g4lblvtx/TrackFastSimEval.h>
 
 #include <fun4all/Fun4AllServer.h>
 
@@ -192,13 +194,19 @@ void Tracking_Reco()
   //-------------------------
   // CEMC
   //-------------------------
-
   if (Enable::CEMC && G4TRACKING::PROJECTION_CEMC)
   {
     kalman->add_state_name("CEMC");
   }
+  //-------------------------
+  // All Silicon Tracker
+  //-------------------------
+  if (Enable::ALLSILICON)
+  {
+    add_AllSi_to_kalman(kalman);
+  }   
+  
   se->registerSubsystem(kalman);
-
   return;
 }
 
@@ -216,10 +224,18 @@ void Tracking_Eval(const std::string &outputfile)
   //----------------
   // Fast Tracking evaluation
   //----------------
-
-  PHG4TrackFastSimEval *fast_sim_eval = new PHG4TrackFastSimEval("FastTrackingEval");
-  fast_sim_eval->set_trackmapname(TRACKING::TrackNodeName);
-  fast_sim_eval->set_filename(outputfile);
-  se->registerSubsystem(fast_sim_eval);
+  //if (Enable::ALLSILICON)
+  //{
+  //  TrackFastSimEval *fast_sim_eval = new TrackFastSimEval("FastTrackingEval");
+  //  fast_sim_eval->set_filename(outputfile.c_str());
+  //  se->registerSubsystem(fast_sim_eval);
+  //}
+  //else
+  //{
+    PHG4TrackFastSimEval *fast_sim_eval = new PHG4TrackFastSimEval("FastTrackingEval");
+    fast_sim_eval->set_trackmapname(TRACKING::TrackNodeName);
+    fast_sim_eval->set_filename(outputfile);
+    se->registerSubsystem(fast_sim_eval);
+  //}
 }
 #endif

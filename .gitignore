@@ -82,3 +82,6 @@ tmtags
 
 # For rubinius:
 *.rbc
+
+# For root files:
+*.root

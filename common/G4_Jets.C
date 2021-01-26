@@ -46,6 +46,7 @@ void Jet_Reco()
   truthjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.6), "AntiKt_Truth_r06");
   truthjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.7), "AntiKt_Truth_r07");
   truthjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.8), "AntiKt_Truth_r08");
+  truthjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 1.0), "AntiKt_Truth_r10");
   truthjetreco->set_algo_node("ANTIKT");
   truthjetreco->set_input_node("TRUTH");
   truthjetreco->Verbosity(verbosity);
@@ -63,6 +64,7 @@ void Jet_Reco()
   towerjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.6), "AntiKt_Tower_r06");
   towerjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.7), "AntiKt_Tower_r07");
   towerjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.8), "AntiKt_Tower_r08");
+  towerjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 1.0), "AntiKt_Tower_r10");
   towerjetreco->set_algo_node("ANTIKT");
   towerjetreco->set_input_node("TOWER");
   towerjetreco->Verbosity(verbosity);
@@ -80,6 +82,7 @@ void Jet_Reco()
   clusterjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.6), "AntiKt_Cluster_r06");
   clusterjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.7), "AntiKt_Cluster_r07");
   clusterjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.8), "AntiKt_Cluster_r08");
+  clusterjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 1.0), "AntiKt_Cluster_r10");
   clusterjetreco->set_algo_node("ANTIKT");
   clusterjetreco->set_input_node("CLUSTER");
   clusterjetreco->Verbosity(verbosity);
@@ -95,6 +98,7 @@ void Jet_Reco()
   trackjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.6), "AntiKt_Track_r06");
   trackjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.7), "AntiKt_Track_r07");
   trackjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 0.8), "AntiKt_Track_r08");
+  trackjetreco->add_algo(new FastJetAlgo(Jet::ANTIKT, 1.0), "AntiKt_Track_r10");
   trackjetreco->set_algo_node("ANTIKT");
   trackjetreco->set_input_node("TRACK");
   trackjetreco->Verbosity(verbosity);
