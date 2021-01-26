@@ -1,0 +1,32 @@
+/run/verbose 2
+/vis/scene/create
+/vis/open OGL 1200x900-0+0
+/vis/sceneHandler/create OGL
+/vis/sceneHandler/attach
+/vis/viewer/create ! ! 1200x900-0+0
+/vis/viewer/refresh
+/vis/scene/notifyHandlers
+/vis/ogl/set/displayListLimit 500000
+/vis/viewer/set/viewpointThetaPhi 240 -10
+/vis/viewer/refresh
+/vis/viewer/addCutawayPlane 0 0 0 m 1 0 0
+/vis/viewer/refresh
+/vis/viewer/zoom 1.5
+/vis/viewer/refresh
+/vis/viewer/flush
+/vis/viewer/refresh viewer-0
+/vis/viewer/update viewer-0
+/vis/scene/add/trajectories smooth
+/tracking/storeTrajectory 2
+/vis/scene/notifyHandlers
+/vis/modeling/trajectories/create/drawByCharge
+/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+/vis/scene/notifyHandlers scene-0
+/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+/vis/scene/notifyHandlers scene-0
+/vis/filtering/trajectories/create/attributeFilter
+/vis/filtering/trajectories/attributeFilter-0/setAttribute IMag
+/vis/scene/notifyHandlers scene-0
+/vis/filtering/trajectories/attributeFilter-0/addInterval 2 MeV 1000 GeV
+/vis/scene/notifyHandlers scene-0
+/vis/scene/endOfEventAction accumulate

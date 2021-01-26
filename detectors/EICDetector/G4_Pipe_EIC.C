@@ -104,7 +104,7 @@ double Pipe(PHG4Reco* g4Reco,
   {
     PHG4GDMLSubsystem* gdml = new PHG4GDMLSubsystem("ElectronForwardEnvelope");
     //gdml->set_string_param("GDMPath", string(getenv("CALIBRATIONROOT")) + "/Beam/Detector_chamber_3-20-20.G4Import.gdml");
-    gdml->set_string_param("GDMPath","Detector_chamber_3-20-20.G4Import.gdml");
+    gdml->set_string_param("GDMPath","Detector_chamber_3-20-20.G4Import.gdml");//uses local gdml
     gdml->set_string_param("TopVolName", "ElectronForwardEnvelope");
     gdml->set_int_param("skip_DST_geometry_export", 1);  // do not export extended beam pipe as it is not supported by TGeo and outside Kalman filter acceptance
     gdml->OverlapCheck(OverlapCheck);

@@ -221,7 +221,7 @@ int Fun4All_G4_EICDetector(
   // whether to simulate the Be section of the beam pipe
   Enable::PIPE = false;
   // EIC beam pipe extension beyond the Be-section:
-  //G4PIPE::use_forward_pipes = true;
+  G4PIPE::use_forward_pipes = true;
 
   Enable::EGEM = true;
   Enable::FGEM = true;
