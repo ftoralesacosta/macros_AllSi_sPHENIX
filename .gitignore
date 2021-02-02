@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Singularity downloads
 afs
 *.simg
@@ -9,6 +10,8 @@ cvmfs
 # Prerequisites
 *.d
 
+=======
+>>>>>>> 3db245ce2110e3a3650bd2fc9a6ddcda7826b285
 # Compiled Object files
 *.slo
 *.lo
@@ -26,7 +29,10 @@ cvmfs
 
 # Fortran module files
 *.mod
+<<<<<<< HEAD
 *.smod
+=======
+>>>>>>> 3db245ce2110e3a3650bd2fc9a6ddcda7826b285
 
 # Compiled Static libraries
 *.lai
@@ -38,3 +44,64 @@ cvmfs
 *.exe
 *.out
 *.app
+<<<<<<< HEAD
+=======
+# http://www.gnu.org/software/automake
+
+Makefile.in
+
+# http://www.gnu.org/software/autoconf
+
+autom4te.cache
+aclocal.m4
+compile
+configure
+depcomp
+install-sh
+missing
+stamp-h1
+
+config.guess
+config.sub
+ltmain.sh
+
+# ROOT ALiCE compile file
+AutoDict_*
+*.d
+
+# Have editor/IDE/OS specific files you need to ignore? Consider using a global gitignore: 
+#
+# * Create a file at ~/.gitignore
+# * Include files you want ignored
+# * Run: git config --global core.excludesfile ~/.gitignore
+#
+# After doing this, these files will be ignored in all your git projects,
+# saving you from having to 'pollute' every project you touch with them
+#
+# For MacOS:
+#
+.DS_Store
+
+# ignore RVM configuration
+.rvmrc
+
+# For TextMate
+*.tmproj
+tmtags
+
+# For emacs:
+*~
+\#*
+.\#*
+
+# For vim:
+*.swp
+
+# For redcar:
+.redcar
+
+# For rubinius:
+*.rbc
+
+# For ROOT files:
+*.root
