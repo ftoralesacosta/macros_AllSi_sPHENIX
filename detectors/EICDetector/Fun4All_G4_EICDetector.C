@@ -7,7 +7,7 @@
 #include <G4Setup_EICDetector.C>
 #include <G4_Bbc.C>
 #include <G4_CaloTrigger.C>
-#include "G4_DSTReader_EICDetector.C" //use same-dir version
+#include "G4_DSTReader_EICDetector.C" //quotes source file in same dir first.
 #include <G4_FwdJets.C>
 #include <G4_Global.C>
 #include <G4_HIJetReco.C>
@@ -29,6 +29,7 @@ R__LOAD_LIBRARY(libmyjetanalysis.so)
 
 int Fun4All_G4_EICDetector(
     const int nEvents = 1,
+    const int random_seed=0,
     const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
@@ -162,10 +163,15 @@ int Fun4All_G4_EICDetector(
     INPUTGENERATOR::Pythia6->set_config_file(string(getenv("CALIBRATIONROOT")) + "/Generators/phpythia6_ep.cfg");
   }
 
+  if (random_seed != 0)
+  {
+    cout<<"USING RANDOM SEED OF "<<random_seed<<endl<<endl;
+    rc->set_IntFlag("RANDOMSEED", random_seed);
+  }
   if (Input::PYTHIA8)
   {
     //INPUTGENERATOR::Pythia8->set_config_file(string(getenv("CALIBRATIONROOT")) + "/Generators/phpythia8_ep.cfg");
-    INPUTGENERATOR::Pythia8->set_config_file("phpythia8.cfg");
+    INPUTGENERATOR::Pythia8->set_config_file("./phpythia8.cfg");
   }
 
   //--------------
@@ -247,14 +253,14 @@ int Fun4All_G4_EICDetector(
   Enable::CEMC_CELL = Enable::CEMC && true;
   Enable::CEMC_TOWER = Enable::CEMC_CELL && true;
   Enable::CEMC_CLUSTER = Enable::CEMC_TOWER && true;
-  Enable::CEMC_EVAL = Enable::CEMC_CLUSTER && true;
+  Enable::CEMC_EVAL = Enable::CEMC_CLUSTER && false;
 
   Enable::HCALIN = true;
   //  Enable::HCALIN_ABSORBER = true;
   Enable::HCALIN_CELL = Enable::HCALIN && true;
   Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
   Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
-  Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
+  Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && false;
 
   Enable::MAGNET = true;
 
@@ -263,7 +269,7 @@ int Fun4All_G4_EICDetector(
   Enable::HCALOUT_CELL = Enable::HCALOUT && true;
   Enable::HCALOUT_TOWER = Enable::HCALOUT_CELL && true;
   Enable::HCALOUT_CLUSTER = Enable::HCALOUT_TOWER && true;
-  Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && true;
+  Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && false;
 
   // EICDetector geometry - barrel
   Enable::DIRC = true;
@@ -276,13 +282,13 @@ int Fun4All_G4_EICDetector(
   //  Enable::FEMC_ABSORBER = true;
   Enable::FEMC_TOWER = Enable::FEMC && true;
   Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
-  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
+  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && false;
 
   Enable::FHCAL = true;
   //  Enable::FHCAL_ABSORBER = true;
   Enable::FHCAL_TOWER = Enable::FHCAL && true;
   Enable::FHCAL_CLUSTER = Enable::FHCAL_TOWER && true;
-  Enable::FHCAL_EVAL = Enable::FHCAL_CLUSTER && true;
+  Enable::FHCAL_EVAL = Enable::FHCAL_CLUSTER && false;
 
   // EICDetector geometry - 'electron' direction
   Enable::EEMC = true;
@@ -301,9 +307,9 @@ int Fun4All_G4_EICDetector(
   // Select only one jet reconstruction- they currently use the same
   // output collections on the node tree!
   Enable::JETS = true;
-  //Enable::JETS_EVAL = Enable::JETS && true;
+  Enable::JETS_EVAL = Enable::JETS && true;
 
-  Enable::FWDJETS = true;
+  Enable::FWDJETS = false;
   //Enable::FWDJETS_EVAL = Enable::FWDJETS && true;
 
   // HI Jet Reco for jet simulations in Au+Au (default is false for
@@ -487,7 +493,7 @@ int Fun4All_G4_EICDetector(
     se->registerOutputManager(out);
   }
 
-  MyJetAnalysis *myJetAnalysis = new MyJetAnalysis("AntiKt_Track_r08","AntiKt_Truth_r08","e+jet_output.root");
+  MyJetAnalysis *myJetAnalysis = new MyJetAnalysis("AntiKt_Track_r10","AntiKt_Truth_r10",outputroot + "_e+jet_Tree.root");
   myJetAnalysis->use_initial_vertex();
   se->registerSubsystem(myJetAnalysis);
   //-----------------

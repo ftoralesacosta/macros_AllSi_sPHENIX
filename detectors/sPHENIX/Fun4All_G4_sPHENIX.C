@@ -26,8 +26,10 @@
 
 #include <phool/PHRandomSeed.h>
 #include <phool/recoConsts.h>
+#include <myjetanalysis/MyJetAnalysis.h>
 
 R__LOAD_LIBRARY(libfun4all.so)
+R__LOAD_LIBRARY(libmyjetanalysis.so)
 
 // For HepMC Hijing
 // try inputFile = /sphenix/sim/sim01/sphnxpro/sHijing_HepMC/sHijing_0-12fm.dat
@@ -521,6 +523,9 @@ int Fun4All_G4_sPHENIX(
       }
     se->registerOutputManager(out);
   }
+  MyJetAnalysis *myJetAnalysis = new MyJetAnalysis("AntiKt_Track_r08","AntiKt_Truth_r08","e+jet_output.root");
+  myJetAnalysis->use_initial_vertex();
+  se->registerSubsystem(myJetAnalysis);
   //-----------------
   // Event processing
   //-----------------
