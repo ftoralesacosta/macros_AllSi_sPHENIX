@@ -1,7 +1,7 @@
 
-# Welcome
+# sPHENIX All-Sillicon Tracker Macros
 
-This is an edited version of the standard macros respository for [sPHENIX colla boration](https://www.sphenix.bnl.gov/).
+This is an edited version of the standard macros respository for [sPHENIX collaboration](https://www.sphenix.bnl.gov/).
 
 Macros have been such that the LBL all-sillicon tracker design is incorporated into the EIC detector. A modified assymetric beampipe is also included, as well as a pythia config file specific to performance studies of the all-sillicon tracker. This repository keeps intact the macros in the 'common' directory, and copies the relevant macros te the EIC detector directory. The Fun4All macro for running has been edited to prefer these macros, in the same directory, over the macros in 'common'.
 
